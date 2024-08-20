@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Font Icons -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Search Results</title>
+  </head>
+  <body>
+    <!-- Header starts -->
+    <div class="header">
+      <div class="header__left">
+        <a href="#">Contact Us</a>
+      </div>
+      <div class="header__right">
+        <a href="#">Gmail</a>
+        <a href="#">Images</a>
+        <span class="material-symbols-outlined header__apps">apps</span>
+        <span class="material-symbols-outlined">account_circle</span>
+      </div>
+    </div>
+    <!-- Header ends -->
+
+    <!-- Main body starts -->
+    <div class="main_body">
+      <div class="hoopgle">hoopgle</div>
+      <div id="search-results" class="search-results"></div>
+    </div>
+    <!-- Main body ends -->
+
+    <script>
+      function getQueryParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      }
+
+      function displayResults() {
+        const query = getQueryParameter("query");
+        if (query) {
+          const resultsContainer = document.getElementById("search-results");
+          resultsContainer.innerHTML = `<p>Showing results for: ${query}</p>`;
+          // Add logic here to display actual search results based on the query.
+        }
+      }
+
+      window.onload = displayResults;
+    </script>
+  </body>
+</html>
