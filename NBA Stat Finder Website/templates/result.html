@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <title>Result Page</title>
+    <style>
+      /* Same root variables for light/dark modes */
+      :root {
+        --background-color: #ffffff;
+        --text-color: #000000;
+        --input-bg-color: #f1f1f1;
+        --header-bg-color: #f8f8f8;
+        --button-bg-color: grey;
+        --button-text-color: white;
+        --button-active-bg-color: orange;
+        --table-header-bg-color: #f2f2f2;
+      }
+
+      body.dark-mode {
+        --background-color: #121212;
+        --text-color: #ffffff;
+        --input-bg-color: #333333;
+        --header-bg-color: #242424;
+        --button-bg-color: #444444;
+        --button-text-color: #ffffff;
+        --button-active-bg-color: #ff5722;
+        --table-header-bg-color: #333333;
+      }
+
+      body {
+        background-color: var(--background-color);
+        color: var(--text-color);
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 30px; /* Adjusted vertical padding */
+        align-items: center;
+        box-sizing: border-box;
+        background-color: var(--header-bg-color);
+        height: 80px; /* Slightly increased the height */
+      }
+
+      .header__left {
+        display: flex;
+        align-items: flex-end; /* Align bottom to balance spacing */
+      }
+
+      .header__right {
+        margin-left: auto;
+      }
+
+      .hoopgle {
+        font-family: "Nabla", sans-serif;
+        font-size: 4rem;
+        color: var(--text-color);
+        margin-right: 20px;
+        padding-top: 10px; /* Added padding to give it space from the top */
+        text-decoration: none; /* Ensure no underline */
+      }
+
+      .game-logs-table {
+        width: 90%;
+        max-width: 1000px;
+        margin: 0px auto;
+        border-collapse: collapse;
+        font-size: 20px;
+        transform: scale(0.7);
+        transform-origin: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .game-logs-table th,
+      .game-logs-table td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+        text-align: left;
+        color: var(--text-color);
+      }
+
+      .game-logs-table th {
+        background-color: var(--table-header-bg-color);
+      }
+
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: var(--button-active-bg-color);
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+    </style>
+  </head>
+  <body id="body">
+    <!-- Header starts -->
+    <div class="header">
+      <div class="header__left">
+        <a href="/" class="hoopgle">hoopgle</a>
+      </div>
+      <div class="header__right">
+        <a href="#">Contact Us</a>
+        <!-- Dark Mode Toggle Switch -->
+        <label class="toggle-switch">
+          <input type="checkbox" id="themeToggle" />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+    <!-- Header ends -->
+
+    <!-- Main body starts -->
+    <div class="main_body">
+      <h1>Path: /{{ path }}</h1>
+      <p>{{ result_message }}</p>
+      <!-- Render the game logs table here -->
+      <div>{{ game_logs_html | safe }}</div>
+    </div>
+    <!-- Main body ends -->
+
+    <script>
+      // Dark Mode Toggle
+      const toggleSwitch = document.getElementById("themeToggle");
+      const body = document.getElementById("body");
+
+      // Check saved theme preference on load
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark-mode") {
+          body.classList.add("dark-mode");
+          toggleSwitch.checked = true;
+        }
+      });
+
+      // Toggle dark mode on switch change
+      toggleSwitch.addEventListener("change", () => {
+        body.classList.toggle("dark-mode");
+
+        // Save the preference in localStorage
+        if (body.classList.contains("dark-mode")) {
+          localStorage.setItem("theme", "dark-mode");
+        } else {
+          localStorage.setItem("theme", "light-mode");
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <title>Google UI Clone</title>
+    <style>
+      :root {
+        --background-color: #ffffff;
+        --text-color: #000000;
+        --input-bg-color: #f1f1f1;
+        --header-bg-color: #f8f8f8;
+        --button-bg-color: grey;
+        --button-text-color: white;
+        --button-active-bg-color: orange;
+      }
+
+      body.dark-mode {
+        --background-color: #121212;
+        --text-color: #ffffff;
+        --input-bg-color: #333333;
+        --header-bg-color: #242424;
+        --button-bg-color: #444444;
+        --button-text-color: #ffffff;
+        --button-active-bg-color: #ff5722;
+      }
+
+      body {
+        background-color: var(--background-color);
+        color: var(--text-color);
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 30px;
+        align-items: center;
+        box-sizing: border-box;
+        background-color: var(--header-bg-color);
+      }
+
+      .header__left a,
+      .header__right a {
+        color: var(--text-color);
+        margin-right: 15px;
+        text-decoration: none;
+      }
+
+      .hoopgle {
+        font-family: "Nabla", sans-serif;
+        font-size: 4rem;
+        color: var(--text-color);
+      }
+
+      .search__input input {
+        background-color: var(--input-bg-color);
+        color: var(--text-color);
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+      }
+
+      .search-button {
+        background-color: var(--button-bg-color);
+        color: var(--button-text-color);
+        cursor: not-allowed;
+      }
+
+      .search-button.active {
+        background-color: var(--button-active-bg-color);
+        cursor: pointer;
+      }
+
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: var(--button-active-bg-color);
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+    </style>
+  </head>
+  <body id="body">
+    <!-- Header starts -->
+    <div class="header">
+      <div class="header__left">
+        <a href="#">Contact Us</a>
+      </div>
+      <div class="header__right">
+        <a href="#">Gmail</a>
+        <a href="#">Images</a>
+        <span class="material-symbols-outlined header__apps">apps</span>
+        <span class="material-symbols-outlined">account_circle</span>
+        <!-- Dark Mode Toggle Switch -->
+        <label class="toggle-switch">
+          <input type="checkbox" id="themeToggle" />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+    <!-- Header ends -->
+
+    <!-- Main body starts -->
+    <div class="main_body">
+      <div class="hoopgle">hoopgle</div>
+
+      <!-- Search Starts -->
+      <form id="search-form" action="/stat_search" method="POST">
+        <div class="search__input">
+          <span id="dynamic-label" class="dynamic-label">Player Name:</span>
+          <!-- Dynamic label -->
+          <input
+            type="text"
+            id="search-box"
+            class="search-box"
+            name="query"
+            placeholder="Search player stats"
+            onkeydown="handleKeyDown(event)"
+            oninput="updateLabel()"
+          />
+          <span class="material-symbols-outlined" onclick="statSearch()"
+            >search</span
+          >
+        </div>
+
+        <div class="search__buttons">
+          <button
+            type="submit"
+            class="search-button inactive"
+            id="stat-search-btn"
+            disabled
+          >
+            Stat Search
+          </button>
+          <button type="button" class="search-button" onclick="statSearch()">
+            I'm Feeling Lucky
+          </button>
+        </div>
+      </form>
+      <!-- Search Ends -->
+    </div>
+    <!-- Main body ends -->
+
+    <script>
+      function statSearch() {
+        const query = document.getElementById("search-box").value;
+        if (query) {
+          document.getElementById("search-form").submit();
+        }
+      }
+
+      function handleKeyDown(event) {
+        if (event.key === "Enter") {
+          event.preventDefault(); // Prevent default form submission
+          statSearch();
+        }
+      }
+
+      function updateLabel() {
+        const searchBox = document.getElementById("search-box");
+        const dynamicLabel = document.getElementById("dynamic-label");
+        const statSearchBtn = document.getElementById("stat-search-btn");
+        const tokens = searchBox.value.trim().split(/\s+/);
+
+        // Update the dynamic label text
+        if (tokens.length >= 1 && tokens[0] !== "") {
+          dynamicLabel.textContent = "Player Name:";
+        }
+
+        if (tokens.length === 2) {
+          dynamicLabel.textContent = "Player Prop:";
+        }
+
+        if (tokens.length === 3) {
+          dynamicLabel.textContent = "Over/Under:";
+        }
+
+        if (tokens.length === 4) {
+          dynamicLabel.textContent = "Prop Line:";
+        }
+
+        if (tokens.length === 5) {
+          dynamicLabel.textContent = "Regular/Playoff:";
+        }
+
+        if (tokens.length >= 6) {
+          dynamicLabel.textContent = "Year:";
+        }
+
+        // Change the button state based on token count
+        if (tokens.length == 7) {
+          statSearchBtn.classList.add("active");
+          statSearchBtn.classList.remove("inactive");
+          statSearchBtn.disabled = false;
+        } else {
+          statSearchBtn.classList.remove("active");
+          statSearchBtn.classList.add("inactive");
+          statSearchBtn.disabled = true;
+        }
+      }
+
+      // Dark Mode Toggle
+      const toggleSwitch = document.getElementById("themeToggle");
+      const body = document.getElementById("body");
+
+      // Check saved theme preference on load
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark-mode") {
+          body.classList.add("dark-mode");
+          toggleSwitch.checked = true;
+        }
+      });
+
+      // Toggle dark mode on switch change
+      toggleSwitch.addEventListener("change", () => {
+        body.classList.toggle("dark-mode");
+
+        // Save the preference in localStorage
+        if (body.classList.contains("dark-mode")) {
+          localStorage.setItem("theme", "dark-mode");
+        } else {
+          localStorage.setItem("theme", "light-mode");
+        }
+      });
+    </script>
+  </body>
+</html>
