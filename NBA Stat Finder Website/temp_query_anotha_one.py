@@ -23,7 +23,7 @@ def fuzzy_match_stat_cat(query, stat_cats):
     words = remaining_query.split()
     for word in words:
         match, score = process.extractOne(word, stat_cats)
-        if score > 80:  # Adjust threshold as needed
+        if score > 80 and match not in matched_stats:  # Adjust threshold as needed and avoid duplicates
             matched_stats.append(match)
             remaining_query = remaining_query.replace(word, '').strip()
 
@@ -77,11 +77,17 @@ def identify_query_components(query):
     # The remaining query is considered the player's name
     name = query.strip()
 
+    # Ensure no extra words are left in the player's name
+    name = ' '.join([word for word in name.split() if word.lower() not in stat_cat_list and word.lower() not in ["double", "triple"]])
+
     return year, season, over_under, stat_cat, line, name
 
 # Example usage
 queries = [
-    "points over 10 lebron james playoffs 2024","deaaron fox double triple regular season 2024"
+    "points over 10 lebron james playoffs 2024",
+    "deaaron fox double triple regular season 2024",
+    "al horford triple double playoffs 2010",
+    "jayson tatum under 10 rebounds regular season 2023"
 ]
 
 for query in queries:
