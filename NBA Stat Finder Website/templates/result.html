@@ -161,8 +161,56 @@
     <div class="main_body">
       <h1>Path: /{{ path }}</h1>
       <p>{{ result_message }}</p>
+
       <!-- Render the game logs table here -->
       <div>{{ game_logs_html | safe }}</div>
+
+      {% if total_game_logs_html %}
+      <div>{{ total_game_logs_html | safe }}</div>
+      {% endif %}
+      <!-- Render the last5 result and table if it exists -->
+      {% if last5_df %}
+      <h3 style="text-align: left">{{ last5_result }}</h3>
+      <div>{{ last5_df | safe }}</div>
+      {% endif %}
+
+      <!-- Conditionally render each game log playoff -->
+      {% if first_game_log %}
+      <h3>First Game Log</h3>
+      <div>{{ first_game_log | safe }}</div>
+      {% endif %}
+
+      <!-- Render the last10 result and table if it exists -->
+      {% if last10_df %}
+      <h3 style="text-align: left">{{ last10_result }}</h3>
+      <div>{{ last10_df | safe }}</div>
+      {% endif %}
+
+      <!-- Conditionally render each game log playoff -->
+
+      {% if second_game_log %}
+      <h3>Second Game Log</h3>
+      <div>{{ second_game_log | safe }}</div>
+      {% endif %}
+
+      <!-- Render the last15 result and table if it exists -->
+      {% if last15_df %}
+      <h3 style="text-align: left">{{ last15_result }}</h3>
+      <div>{{ last15_df | safe }}</div>
+      {% endif %}
+
+      <!-- Conditionally render each game log playoff -->
+
+      {% if third_game_log %}
+      <h3>Third Game Log</h3>
+      <div>{{ third_game_log | safe }}</div>
+      {% endif %}
+      <!-- Conditionally render each game log playoff -->
+
+      {% if fourth_game_log %}
+      <h3>Fourth Game Log</h3>
+      <div>{{ fourth_game_log | safe }}</div>
+      {% endif %}
     </div>
     <!-- Main body ends -->
 
