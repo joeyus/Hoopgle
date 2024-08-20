@@ -36,8 +36,19 @@ def stat_search1():
 
     if split == "regular":
         player_url = regularURL(year, name, last_name)
-        result_message, game_logs_html = tableScrape(player_url, cat_index, closest_ou_key, propt_num, name, closest_stat_key, year)
-
+        result_message, game_logs_html, last5_result, last5_df, last10_result, last10_df, last15_result, last15_df = tableScrape(player_url, cat_index, closest_ou_key, propt_num, name, closest_stat_key, year)
+        
+        return render_template(
+        'result.html',
+        path=url_path,
+        result_message=result_message,
+        game_logs_html=game_logs_html,
+        last5_result=last5_result,
+        last5_df=last5_df,
+        last10_result=last10_result,
+        last10_df=last10_df,
+        last15_result=last15_result,
+        last15_df=last15_df)
     else:
         player_url = playoffURL(name, last_name)
         result_message, game_logs_html = playoffTableScrape(player_url, cat_index, closest_ou_key, propt_num, name, closest_stat_key)
@@ -156,15 +167,15 @@ def tableScrape(player_url, cat_index, closest_ou_key, propt_num, name, closest_
     game_logs_html = temp_df.to_html(classes='game-logs-table', index=False)
 
     #testing of last 5 percentages
-    last5_percentage(df, closest_ou_key, closest_stat_key, propt_num, cat_index)
-    print("testing last5_percentage done")
-    last10_percentage(df, closest_ou_key, closest_stat_key, propt_num, cat_index)
-    print("testing last10_percentage done")
-    last15_percentage(df, closest_ou_key, closest_stat_key, propt_num, cat_index )
-    print("testing last15_percentage done")
+    last5_result, last5_df =last5_percentage(df, closest_ou_key, closest_stat_key, propt_num, cat_index, name)
+ 
+    last10_result, last10_df =last10_percentage(df, closest_ou_key, closest_stat_key, propt_num, cat_index, name)
+
+    last15_result, last15_df =last15_percentage(df, closest_ou_key, closest_stat_key, propt_num, cat_index, name )
+
 
     # Return the result message and temp_df for further processing if needed
-    return result_message, game_logs_html
+    return result_message, game_logs_html, last5_result, last5_df, last10_result, last10_df, last15_result, last15_df
 
 def getVariables(stat_cat, over_under, line):
     stat_dict = {
@@ -369,7 +380,7 @@ def identify_query_components(query):
 
 
 #Regular season functions
-def last5_percentage(data_arrays, closest_ou_key, closest_stat_key, propt_num, cat_index):
+def last5_percentage(data_arrays, closest_ou_key, closest_stat_key, propt_num, cat_index, name):
     last5_array = []
     stat_key_finder = {"points": "PTS", "rebounds": "TRB", "blocks": "BLK", "steal" : "STL", "assists": "assists", "Freethrow" : "FT", "three pointer" : "3P"}
     stat_key = stat_key_finder.get(closest_stat_key)
@@ -403,14 +414,19 @@ def last5_percentage(data_arrays, closest_ou_key, closest_stat_key, propt_num, c
 
         i-=1
     temp_df = pd.DataFrame(last5_array, columns=data_arrays.columns)
-    print(temp_df)
-    print("Testing last 5games")
-    print(len(last5_array)/5)
+
+    percentage = (len(last5_array)/5) *100
+    formatted_percentage = "{:.0f}".format(percentage)
+
+    result_string = (f"{name} game logs where he has covered {closest_ou_key} {propt_num} {closest_stat_key}. {len(last5_array)}/5 ({formatted_percentage}%)")
+
     game_logs_html = temp_df.to_html(classes='game-logs-table', index=False)
 
-    print("End testing last 5games")
+    return result_string, game_logs_html
 
-def last10_percentage(data_arrays, closest_ou_key, closest_stat_key, propt_num, cat_index):
+
+
+def last10_percentage(data_arrays, closest_ou_key, closest_stat_key, propt_num, cat_index,name):
     last10_array = []
     stat_key_finder = {"points": "PTS", "rebounds": "TRB", "blocks": "BLK", "steal" : "STL", "assists": "assists", "Freethrow" : "FT", "three pointer" : "3P"}
     stat_key = stat_key_finder.get(closest_stat_key)
@@ -443,14 +459,20 @@ def last10_percentage(data_arrays, closest_ou_key, closest_stat_key, propt_num, 
 
         i-=1
     temp_df = pd.DataFrame(last10_array, columns=data_arrays.columns)
-    print(temp_df)
-    print("Testing last 10games")
-    print(len(last10_array)/10)
+
+    percentage = (len(last10_array)/10) *100
+    formatted_percentage = "{:.0f}".format(percentage)
+
+    result_string = (f"{name} game logs where he has covered {closest_ou_key} {propt_num} {closest_stat_key}. {len(last10_array)}/10 ({formatted_percentage}%)")
+
+
+
     game_logs_html = temp_df.to_html(classes='game-logs-table', index=False)
         
-    print("End testing last 10games")
 
-def last15_percentage(data_arrays, closest_ou_key, closest_stat_key, propt_num, cat_index ):
+    return result_string, game_logs_html
+
+def last15_percentage(data_arrays, closest_ou_key, closest_stat_key, propt_num, cat_index, name):
     last15_array = []
     stat_key_finder = {"points": "PTS", "rebounds": "TRB", "blocks": "BLK", "steal" : "STL", "assists": "assists", "Freethrow" : "FT", "three pointer" : "3P"}
     stat_key = stat_key_finder.get(closest_stat_key)
@@ -483,12 +505,17 @@ def last15_percentage(data_arrays, closest_ou_key, closest_stat_key, propt_num, 
 
         i-=1
     temp_df = pd.DataFrame(last15_array, columns=data_arrays.columns)
-    print(temp_df)
-    print("Testing last 15games")
-    print(len(last15_array)/15)
+
+    percentage = (len(last15_array)/15) *100
+    formatted_percentage = "{:.0f}".format(percentage)
+
+    result_string = (f"{name} game logs where he has covered {closest_ou_key} {propt_num} {closest_stat_key}. {len(last15_array)}/15 ({formatted_percentage}%)")
+
+
     game_logs_html = temp_df.to_html(classes='game-logs-table', index=False)
 
-    print("End testing last 15games")
+    return result_string, game_logs_html
+
 
 #Playoff functions 
 def latest_percentage(data_arrays, closest_ou_key, closest_stat_key, cat_index, propt_num, closest_playoff_name):
@@ -496,12 +523,8 @@ def latest_percentage(data_arrays, closest_ou_key, closest_stat_key, cat_index, 
     stat_key_finder = {"points": "PTS", "rebounds": "TRB", "blocks": "BLK", "steal" : "STL", "assists": "assists", "Freethrow" : "FT", "three pointer" : "3P"}
     stat_key = stat_key_finder.get(closest_stat_key)
 
-    if data_arrays[-1][5] == "@":
-        latest_series_numb = 7
-        latest_series = int(data_arrays[-1][latest_series_numb])
-    else:
-        latest_series_numb = 6
-        latest_series = int(data_arrays[-1][latest_series_numb])
+    latest_series = int(data_arrays[-1][7])
+
     end_index = len(data_arrays) - latest_series
     i = len(data_arrays) - 1
 
@@ -539,12 +562,14 @@ def latest_percentage(data_arrays, closest_ou_key, closest_stat_key, cat_index, 
     percentage = (len(latest_array) / latest_series) * 100
     formatted_percentage = "{:.0f}".format(percentage)
     print(f"{closest_playoff_name} game logs where he has covered {closest_ou_key} {propt_num} {closest_stat_key}. {len(latest_array)}/{latest_series}({formatted_percentage}%)")
-    if latest_array:
-        print(latest_array)
+    print(latest_array)
     #Should print the games where is was not covered 
     #luka doesnt work pj washington doesnt work name issue
     #dereck lively doenst work line 162 division by zero
     end_index = end_index-1
+    
+
+
     return end_index
 
 def second_latest_percentage(data_arrays, closest_ou_key,closest_stat_key, cat_index, propt_num, closest_playoff_name, end_index):
@@ -683,6 +708,3 @@ def fourth_latest_percentage(data_arrays, closest_ou_key, closest_stat_key,cat_i
 
 if __name__ == '__main__':
     app.run(debug=False)
-    
-#test for github
-#testing 2
