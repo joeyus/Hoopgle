@@ -10,6 +10,40 @@ from fuzzywuzzy import process
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
+#team logos
+team_logo_map = {
+    "ATL": "/static/team_Logo/nba-atlanta-hawks-logo.png",
+    "BOS": "/static/team_Logo/nba-boston-celtics-logo.png",
+    "BRK": "/static/team_Logo/nba-brooklyn-nets-logo.png",
+    "CHA": "/static/team_Logo/nba-charlotte-hornets-logo.png",
+    "CHI": "/static/team_Logo/nba-chicago-bulls-logo.png",
+    "CLE": "/static/team_Logo/nba-cleveland-cavaliers-logo.png",
+    "DAL": "/static/team_Logo/nba-dallas-mavericks-logo.png",
+    "DEN": "/static/team_Logo/nba-denver-nuggets-logo.png",
+    "DET": "/static/team_Logo/nba-detroit-pistons-logo.png",
+    "GSW": "/static/team_Logo/nba-golden-state-warriors-logo.png",
+    "HOU": "/static/team_Logo/nba-houston-rockets-logo.png",
+    "IND": "/static/team_Logo/nba-indiana-pacers-logo.png",
+    "LAC": "/static/team_Logo/NBA-LA-Clippers-logo.png",
+    "LAL": "/static/team_Logo/nba-los-angeles-lakers-logo.png",
+    "MEM": "/static/team_Logo/nba-memphis-grizzlies-logo.png",
+    "MIA": "/static/team_Logo/nba-miami-heat-logo.png",
+    "MIL": "/static/team_Logo/nba-milwaukee-bucks-logo.png",
+    "MIN": "/static/team_Logo/nba-minnesota-timberwolves-logo.png",
+    "NOP": "/static/team_Logo/nba-new-orleans-pelicans-logo.png",
+    "NYK": "/static/team_Logo/nba-new-york-knicks-logo.png",
+    "OKC": "/static/team_Logo//nba-oklahoma-city-thunder-logo.png",
+    "ORL": "/static/team_Logo/nba-orlando-magic-logo.png",
+    "PHI": "/static/team_Logo/nba-philadelphia-76ers-logo.png",
+    "PHO": "/static/team_Logo/nba-phoenix-suns-logo.png",
+    "POR": "/static/team_Logo/nba-portland-trail-blazers-logo.png",
+    "SAC": "/static/team_Logo/nba-sacramento-kings-logo.png",
+    "SAS": "/static/team_Logo/nba-san-antonio-spurs-logo.png",
+    "TOR": "/static/team_Logo/nba-toronto-raptors-logo.png",
+    "UTA": "/static/team_Logo/nba-utah-jazz-logo.png",
+    "WAS": "/static/team_Logo/nba-washington-wizards-logo.png"
+}
+
 
 @app.route('/')
 def home():
@@ -17,6 +51,14 @@ def home():
     return render_template('site.html')
 
 @app.route('/stat_search', methods=['POST'])
+def add_logo(team_abbreviation):
+    # Get the path to the logo from the team_logo_map
+    logo_path = team_logo_map.get(team_abbreviation, '')
+    # Create the HTML for the image, using the static path
+    logo_html = f'<img src="{logo_path}" width="30" height="30" style="vertical-align: middle; margin-left: 5px;">'
+    # Return the team abbreviation followed by the image, all wrapped in a span
+    return f'<span>{team_abbreviation}{logo_html}</span>'
+
 def stat_search1():
     query = request.form['query']
     tokens = query.split()
@@ -96,8 +138,12 @@ def playoffURL(name, last_name):
     return career_playoff_url
 
 def regularOrPlayoffs(season):
-    playoff_dict = {"regular", "Postseason", "Playoffs"}
+    playoff_dict = {"regular", "Postseason", "Playoffs" "playoff", "regular season", "season", "postseason", "post season"}
     closest_split, _ = process.extractOne(season, playoff_dict, scorer=fuzz.token_sort_ratio)
+    if closest_split == {"regular","regular season","season"}:
+        closest_split == "regular"
+    else:
+        closest_split == "playoffs"
     return closest_split
 
 def regularURL(year, name, last_name):
@@ -168,6 +214,8 @@ def tableScrape(player_url, cat_index, closest_ou_key, propt_num, name, closest_
     # Convert the list of Series (rows) to a DataFrame
     temp_df = pd.DataFrame(rows_list, columns=df.columns)
 
+    temp_df['Tm'] = temp_df['Tm'].apply(lambda x: add_logo(x))
+    temp_df['Opp'] = temp_df['Opp'].apply(lambda x: add_logo(x))
     # Calculate inactive games
     inactive_games = df['G'].apply(lambda x: len(str(x)) > 2).sum()
 
@@ -181,7 +229,8 @@ def tableScrape(player_url, cat_index, closest_ou_key, propt_num, name, closest_
     # Display the final result
     result_message = f"{name} has covered the {closest_ou_key} {propt_num} {closest_stat_key} line in {year} in {len(temp_df)}/{active_games} ({format_percentage}%) games."
 
-    game_logs_html = temp_df.to_html(classes='game-logs-table', index=False)
+    game_logs_html = temp_df.to_html(classes='game-logs-table', index=False, escape=False)
+
 
     #testing of last 5 percentages
     last5_result, last5_df =last5_percentage(df, closest_ou_key, closest_stat_key, propt_num, cat_index, name)
@@ -319,14 +368,6 @@ def playoffTableScrape(player_url, cat_index, closest_ou_key, propt_num, name, c
     return result_message, total_game_logs_html, first_game_log, second_game_log, third_game_log, fourth_game_log
 
 #Query processing 
-def preprocess_query(query):
-    # Remove stopwords like "during", "in", "the"
-    stopwords = ["during", "in", "the"]
-    for word in stopwords:
-        query = re.sub(rf'\b{word}\b', '', query)
-    query = query.strip()
-    return query
-
 def fuzzy_match_stat_cat(query, stat_cats):
     matched_stats = []
     remaining_query = query
@@ -340,25 +381,35 @@ def fuzzy_match_stat_cat(query, stat_cats):
     # Handle single words by fuzzy matching
     words = remaining_query.split()
     for word in words:
-        match, score = process.extractOne(word, stat_cats)
-        if score > 80:  # Adjust threshold as needed
-            matched_stats.append(match)
-            remaining_query = remaining_query.replace(word, '').strip()
+        if len(word) > 2:  # Exclude very short words from fuzzy matching
+            match, score = process.extractOne(word, stat_cats)
+            if score > 85 and match not in matched_stats:  # Increase threshold and avoid duplicates
+                matched_stats.append(match)
+                remaining_query = remaining_query.replace(word, '').strip()
 
     # Combine all matched stat categories into one string
     stat_cat = ' '.join(matched_stats) if matched_stats else None
 
     return stat_cat, remaining_query
 
+def preprocess_query(query):
+    # Remove stopwords like "during", "in", "the"
+    stopwords = ["during", "in", "the"]
+    for word in stopwords:
+        query = re.sub(rf'\b{word}\b', '', query)
+    query = query.strip()
+    return query
+
 def identify_query_components(query):
     query = preprocess_query(query)
+    query = correct_typos(query)
 
     # Initialize components
     year = season = over_under = stat_cat = line = name = None
 
     # Define patterns
     year_pattern = r"\b(19|20)\d{2}\b"
-    season_pattern = r"\b(playoff|regular season|season|regular|postseason|post season)\b"
+    season_pattern = r"\b(playoffs?|regular season|season|regular|post|post season)\b"
     over_under_pattern = r"\b(over|under)\b"
     line_pattern = r"\b\d+(\.\d+)?\b"
 
@@ -395,8 +446,30 @@ def identify_query_components(query):
     # The remaining query is considered the player's name
     name = query.strip()
 
+    # Ensure no extra words are left in the player's name
+    name = ' '.join([word for word in name.split() if word.lower() not in stat_cat_list and word.lower() not in ["double", "triple"]])
+
     return year, season, over_under, stat_cat, line, name
 
+
+def correct_typos(query):
+    # Correct common typos for "over" and "under"
+    typo_corrections = {
+        "ovr": "over",
+        "ovre": "over",
+        "uder": "under",
+        "undr": "under",
+        "undre": "under",
+        "steels": "steals",
+        "stls": "steals",
+        "asts": "assists",
+        "boards": "rebounds",
+        "pts": "points",
+        "reg" : "regular"
+    }
+    for typo, correction in typo_corrections.items():
+        query = re.sub(rf'\b{typo}\b', correction, query)
+    return query
 
 #Regular season functions
 def last5_percentage(data_arrays, closest_ou_key, closest_stat_key, propt_num, cat_index, name):
@@ -553,7 +626,7 @@ def latest_percentage(data_arrays, closest_ou_key, closest_stat_key, cat_index, 
         else:
             if closest_ou_key == "over":
                 if isinstance(cat_index, int):
-                    if int(data_arrays.iloc[i, cat_index])>propt_num:
+                    if int(data_arrays.iloc[i][stat_key])>propt_num:
                         latest_array.append(data_arrays.iloc[i].tolist())
                 elif isinstance(cat_index, list) and len(cat_index) ==2:
                     temp1 =(data_arrays[i][cat_index[0]]) 
@@ -562,7 +635,7 @@ def latest_percentage(data_arrays, closest_ou_key, closest_stat_key, cat_index, 
                         latest_array.add(tuple(data_arrays[i]))
             else:
                 if isinstance(cat_index, int):
-                    if (int(data_arrays.iloc[i , cat_index])<propt_num) == True:
+                    if (int(data_arrays.iloc[i][stat_key])<propt_num) == True:
                         latest_array.append(data_arrays.iloc[i].tolist())
 
                 elif isinstance(cat_index, list) and len(cat_index)==2:
@@ -597,7 +670,8 @@ def latest_percentage(data_arrays, closest_ou_key, closest_stat_key, cat_index, 
 
 def second_latest_percentage(data_arrays, closest_ou_key,closest_stat_key, cat_index, propt_num, closest_playoff_name, end_index):
     latest_array = []
-   
+    stat_key_finder = {"points": "PTS", "rebounds": "TRB", "blocks": "BLK", "steal" : "STL", "assists": "assists", "Freethrow" : "FT", "three pointer" : "3P"}
+    stat_key = stat_key_finder.get(closest_stat_key)
     latest_series = int(data_arrays.iloc[end_index-1]["G#"])
     
     i = end_index-1
@@ -608,7 +682,7 @@ def second_latest_percentage(data_arrays, closest_ou_key,closest_stat_key, cat_i
         else:
             if closest_ou_key == "over":
                 if isinstance(cat_index, int):
-                    if int(data_arrays.iloc[i, cat_index])>propt_num:
+                    if int(data_arrays.iloc[i][stat_key])>propt_num:
                         latest_array.append(data_arrays.iloc[i].tolist())
                 elif isinstance(cat_index, list) and len(cat_index) ==2:
                     temp1 =(data_arrays[i][cat_index[0]]) 
@@ -617,7 +691,7 @@ def second_latest_percentage(data_arrays, closest_ou_key,closest_stat_key, cat_i
                         latest_array.add(tuple(data_arrays[i]))
             else:
                 if isinstance(cat_index, int):
-                    if (int(data_arrays.iloc[i, cat_index])<propt_num) == True:
+                    if (int(data_arrays.iloc[i][stat_key])<propt_num) == True:
                         latest_array.append(data_arrays.iloc[i].tolist())
                 elif isinstance(cat_index, list) and len(cat_index)==2:
                     temp1 =(data_arrays[i][cat_index[0]]) 
@@ -645,7 +719,8 @@ def second_latest_percentage(data_arrays, closest_ou_key,closest_stat_key, cat_i
 
 def third_latest_percentage(data_arrays, closest_ou_key, closest_stat_key, cat_index, propt_num, closest_playoff_name, end_index):
     latest_array = []
-    
+    stat_key_finder = {"points": "PTS", "rebounds": "TRB", "blocks": "BLK", "steal" : "STL", "assists": "assists", "Freethrow" : "FT", "three pointer" : "3P"}
+    stat_key = stat_key_finder.get(closest_stat_key)
     latest_series = int(data_arrays.iloc[end_index-1]["G#"])
     
     i = end_index-1
@@ -656,7 +731,7 @@ def third_latest_percentage(data_arrays, closest_ou_key, closest_stat_key, cat_i
         else:
             if closest_ou_key == "over":
                 if isinstance(cat_index, int):
-                    if int(data_arrays.iloc[i, cat_index])>propt_num:
+                    if int(data_arrays.iloc[i][stat_key])>propt_num:
                         latest_array.append(data_arrays.iloc[i].tolist())
                 elif isinstance(cat_index, list) and len(cat_index) ==2:
                     temp1 =(data_arrays[i][cat_index[0]]) 
@@ -665,7 +740,7 @@ def third_latest_percentage(data_arrays, closest_ou_key, closest_stat_key, cat_i
                         latest_array.add(tuple(data_arrays[i]))
             else:
                 if isinstance(cat_index, int):
-                    if (int(data_arrays.iloc[i, cat_index])<propt_num) == True:
+                    if (int(data_arrays.iloc[i][stat_key])<propt_num) == True:
                         latest_array.append(data_arrays.iloc[i].tolist())
                 elif isinstance(cat_index, list) and len(cat_index)==2:
                     temp1 =(data_arrays[i][cat_index[0]]) 
@@ -692,55 +767,59 @@ def third_latest_percentage(data_arrays, closest_ou_key, closest_stat_key, cat_i
     return end_index, game_logs_html
 
 def fourth_latest_percentage(data_arrays, closest_ou_key, closest_stat_key,cat_index, propt_num, closest_playoff_name, end_index):
-        latest_array = []
-        
-        latest_series = int(data_arrays.iloc[end_index-1]["G#"])
-        
-        i = end_index-1
-        end_index =end_index - latest_series
-        while i>=end_index: 
-            if len(data_arrays.iloc[i, 1]) > 2:
-                end_index -=1
-            else:
-                if closest_ou_key == "over":
-                    if isinstance(cat_index, int):
-                        if int(data_arrays.iloc[i, cat_index])>propt_num:
-                            latest_array.append(data_arrays.iloc[i].tolist())
-                    elif isinstance(cat_index, list) and len(cat_index) ==2:
-                        temp1 =(data_arrays[i][cat_index[0]]) 
-                        temp2 =(data_arrays[i][cat_index[1]])
-                        if int(temp1)+int(temp2)>propt_num:
-                            latest_array.add(tuple(data_arrays[i]))
-                else:
-                    if isinstance(cat_index, int):
-                        if (int(data_arrays.iloc[i, cat_index])<propt_num) == True:
-                            latest_array.append(data_arrays.iloc[i].tolist())
-
-                    elif isinstance(cat_index, list) and len(cat_index)==2:
-                        temp1 =(data_arrays[i][cat_index[0]]) 
-                        temp2 =(data_arrays[i][cat_index[1]])
-                        if (int(temp1)+int(temp2)<propt_num) == True:
-                            latest_array.add(tuple(data_arrays[i]))
+    latest_array = []
+    stat_key_finder = {"points": "PTS", "rebounds": "TRB", "blocks": "BLK", "steal" : "STL", "assists": "assists", "Freethrow" : "FT", "three pointer" : "3P"}
+    stat_key = stat_key_finder.get(closest_stat_key)
+    latest_series = int(data_arrays.iloc[end_index-1]["G#"])
     
-            i-=1
-        if data_arrays.iloc[end_index, 5] == "@":
-            opp_team = data_arrays.iloc[end_index, 6]
+    i = end_index-1
+    end_index =end_index - latest_series
+    while i>=end_index: 
+        if len(data_arrays.iloc[i, 1]) > 2:
+            end_index -=1
         else:
-            opp_team = data_arrays.iloc[end_index, 5]
-        print("\n")
-        print(f"Latest Playoff Series vs {opp_team}")
-        percentage = (len(latest_array) / latest_series) * 100
-        formatted_percentage = "{:.0f}".format(percentage)
-        print(f"{closest_playoff_name} game logs where he has covered {closest_ou_key} {propt_num} {closest_stat_key}. {len(latest_array)}/{latest_series}({formatted_percentage}%)")
-        temp_df = pd.DataFrame(latest_array, columns=data_arrays.columns)
-        game_logs_html = temp_df.to_html(classes='game-logs-table', index=False)
-        print(temp_df)
+            if closest_ou_key == "over":
+                if isinstance(cat_index, int):
+                    if int(data_arrays.iloc[i][stat_key])>propt_num:
+                        latest_array.append(data_arrays.iloc[i].tolist())
+                elif isinstance(cat_index, list) and len(cat_index) ==2:
+                    temp1 =(data_arrays[i][cat_index[0]]) 
+                    temp2 =(data_arrays[i][cat_index[1]])
+                    if int(temp1)+int(temp2)>propt_num:
+                        latest_array.add(tuple(data_arrays[i]))
+            else:
+                if isinstance(cat_index, int):
+                    if (int(data_arrays.iloc[i][stat_key])<propt_num) == True:
+                        latest_array.append(data_arrays.iloc[i].tolist())
+
+                elif isinstance(cat_index, list) and len(cat_index)==2:
+                    temp1 =(data_arrays[i][cat_index[0]]) 
+                    temp2 =(data_arrays[i][cat_index[1]])
+                    if (int(temp1)+int(temp2)<propt_num) == True:
+                        latest_array.add(tuple(data_arrays[i]))
+
+        i-=1
+    if data_arrays.iloc[end_index, 5] == "@":
+        opp_team = data_arrays.iloc[end_index, 6]
+    else:
+        opp_team = data_arrays.iloc[end_index, 5]
+    print("\n")
+    print(f"Latest Playoff Series vs {opp_team}")
+    percentage = (len(latest_array) / latest_series) * 100
+    formatted_percentage = "{:.0f}".format(percentage)
+    print(f"{closest_playoff_name} game logs where he has covered {closest_ou_key} {propt_num} {closest_stat_key}. {len(latest_array)}/{latest_series}({formatted_percentage}%)")
+    temp_df = pd.DataFrame(latest_array, columns=data_arrays.columns)
+    game_logs_html = temp_df.to_html(classes='game-logs-table', index=False)
+    print(temp_df)
 
 
-        end_index = end_index-1
-        print("printing end_index:")
-        print(end_index)
-        return end_index, game_logs_html
+    end_index = end_index-1
+    print("printing end_index:")
+    print(end_index)
+    return end_index, game_logs_html
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=False)

@@ -1,0 +1,258 @@
+Player	From	To	Pos	Ht	Wt	Birth Date	Colleges
+Mike D'Antoni	1974	1977	G	6-3	185	May 8, 1951	Marshall
+Mike Dabich	1968	1968	C	7-0	242	December 27, 1942	New Mexico State
+Ed Dahler	1952	1952	F	6-5	190	January 31, 1926	Duquesne
+Quintin Dailey	1983	1992	G	6-3	180	January 22, 1961	San Francisco
+Samuel Dalembert	2002	2015	C	6-11	255	May 10, 1981	Seton Hall
+Howie Dallmar	1947	1949	F	6-4	200	May 24, 1922	Stanford
+Erick Dampier	1997	2012	C	6-11	265	July 14, 1975	Mississippi State
+Louie Dampier*	1968	1979	G	6-0	170	November 20, 1944	Kentucky
+Bob Dandridge*	1970	1982	F-G	6-6	195	November 15, 1947	Norfolk State
+Antonio Daniels	1998	2011	G	6-4	195	March 19, 1975	Bowling Green
+Dyson Daniels	2023	2024	G	6-8	199	March 17, 2003	
+Erik Daniels	2005	2005	F	6-8	214	April 1, 1982	Kentucky
+Lloyd Daniels	1993	1998	G	6-7	205	September 4, 1967	Mount San Antonio College
+Marquis Daniels	2004	2013	G-F	6-6	200	January 7, 1981	Auburn
+Mel Daniels*	1968	1977	C	6-9	220	July 20, 1944	Southeastern Iowa Community College, West Burlington Campus, New Mexico
+Troy Daniels	2014	2020	G	6-4	200	July 15, 1991	VCU
+Sasha Danilović	1996	1997	G	6-5	200	February 26, 1970	
+Adrian Dantley*	1977	1991	F-G	6-5	208	February 28, 1955	Notre Dame
+Pete Darcey	1953	1953	C	6-7	217	March 3, 1930	Oklahoma State
+Jimmy Darden	1950	1950	G	6-1	170	June 19, 1922	Denver
+Ollie Darden	1968	1970	F-C	6-7	235	July 28, 1944	Michigan
+Yinka Dare	1995	1998	C	7-0	265	October 10, 1972	George Washington
+Jesse Dark	1975	1975	G	6-5	210	September 2, 1951	VCU
+Nate Darling	2021	2021	G	6-6	200	August 30, 1998	UAB, University of Delaware
+Rick Darnell	1976	1976	C-F	6-10	215	January 1, 1953	Cypress College, Indiana State University, San Jose State
+Jimmy Darrow	1962	1962	G	5-10	170	September 25, 1937	Bowling Green
+Gigi Datome	2014	2015	F	6-8	215	November 27, 1987	
+Brad Daugherty	1987	1994	C	7-0	245	October 19, 1965	UNC
+Mack Daughtry	1971	1971	G	6-3	175	July 20, 1946	Albany State University
+Kornél Dávid	1999	2001	F	6-9	235	October 22, 1971	
+Jermareo Davidson	2008	2009	F	6-10	230	November 15, 1984	Alabama
+Bob Davies*	1949	1955	G-F	6-1	175	January 15, 1920	Seton Hall
+Brandon Davies	2014	2015	F	6-10	240	July 25, 1991	BYU
+Anthony Davis	2013	2024	F-C	6-10	253	March 11, 1993	Kentucky
+Antonio Davis	1994	2006	F-C	6-9	215	October 31, 1968	Texas-El Paso
+Aubrey Davis	1947	1947	G-F	6-2	175	March 28, 1921	Oklahoma Baptist University
+Baron Davis	2000	2012	G	6-3	209	April 13, 1979	UCLA
+Ben Davis	1997	2000	F	6-9	240	December 26, 1972	Kansas, Arizona
+Bill Davis	1947	1947	F	6-3	215	October 3, 1920	Notre Dame
+Bob Davis	1973	1973	F	6-7	215	April 2, 1950	Weber State
+Brad Davis	1978	1992	G	6-3	180	December 17, 1955	Maryland
+Brian Davis	1994	1994	F-G	6-7	200	June 21, 1970	Duke
+Charles Davis	1982	1990	F	6-7	215	October 5, 1958	Vanderbilt
+Charlie Davis	1972	1974	G	6-2	160	September 7, 1949	Wake Forest
+Dale Davis	1992	2007	F-C	6-11	230	March 25, 1969	Clemson
+Deyonta Davis	2017	2019	C-F	6-11	237	December 2, 1996	Michigan State
+Dwight Davis	1973	1977	F	6-8	220	October 28, 1949	Houston
+Ed Davis	2011	2022	F	6-9	218	June 5, 1989	UNC
+Emanual Davis	1997	2003	G	6-4	195	August 27, 1968	Delaware State University
+Glen Davis	2008	2015	F-C	6-9	289	January 1, 1986	LSU
+Harry Davis	1979	1980	F	6-7	220	January 27, 1956	Florida State
+Hubert Davis	1993	2004	G	6-5	183	May 17, 1970	UNC
+Jim Davis	1968	1975	C-F	6-9	225	December 18, 1941	Colorado
+Johnny Davis	1977	1986	G	6-2	170	October 21, 1955	Dayton
+Johnny Davis	2023	2024	G	6-5	196	February 27, 2002	Wisconsin
+Josh Davis	2004	2012	F	6-8	235	August 10, 1980	Wyoming
+Lee Davis	1969	1976	C-F	6-8	235	October 11, 1945	NC Central
+Mark Davis	1989	1989	F-G	6-6	195	June 8, 1963	Old Dominion
+Mark Davis	1996	2000	G-F	6-7	210	April 26, 1973	Howard College, Texas Tech
+Mel Davis	1974	1977	F	6-6	220	November 9, 1950	St. John's
+Mickey Davis	1972	1977	F-G	6-7	195	June 16, 1950	Duquesne
+Mike Davis	1970	1973	G	6-3	185	July 26, 1946	Virginia Union University
+Mike Davis	1983	1983	F	6-10	230	August 2, 1956	Maryland
+Monti Davis	1981	1981	F	6-7	205	July 26, 1958	Tennessee State
+Paul Davis	2007	2010	C	6-11	270	July 21, 1984	Michigan State
+Ralph Davis	1961	1962	G	6-4	180	September 7, 1938	Cincinnati
+Red Davis	1956	1956	C	6-7	220	April 22, 1932	St. John's
+Ricky Davis	1999	2010	G-F	6-6	195	September 23, 1979	Iowa
+Ron Davis	1977	1982	G-F	6-6	198	May 1, 1954	Washington State
+Terence Davis	2020	2023	G	6-4	201	May 16, 1997	Ole Miss
+Terry Davis	1990	2001	F-C	6-9	225	June 17, 1967	Virginia Union University
+Tyler Davis	2019	2019	C	6-10	266	May 22, 1997	Texas A&M
+Walt Davis	1954	1958	C-F	6-8	205	January 5, 1931	Texas A&M
+Walter Davis*	1978	1992	G-F	6-6	193	September 9, 1954	UNC
+Warren Davis	1968	1973	F-C	6-6	212	June 30, 1943	North Carolina A&T
+Willie Davis	1971	1971	C	6-8	234	August 9, 1945	University of North Texas
+JD Davison	2023	2024	G	6-1	195	October 3, 2002	Alabama
+Andre Dawkins	2015	2015	G	6-5	215	September 19, 1991	Duke
+Darryl Dawkins	1976	1989	C	6-11	251	January 11, 1957	
+Johnny Dawkins	1987	1995	G	6-2	165	September 28, 1963	Duke
+Paul Dawkins	1980	1980	F	6-5	190	June 10, 1957	Northern Illinois
+Branden Dawson	2016	2016	F	6-6	225	February 1, 1993	Michigan State
+Eric Dawson	2012	2012	F	6-9	250	July 7, 1984	Midwestern State University
+Jimmy Dawson	1968	1968	G	6-0	175	April 18, 1945	Illinois
+Tony Dawson	1991	1995	F	6-7	215	August 25, 1967	Florida State
+Todd Day	1993	2001	G-F	6-6	188	January 7, 1970	Arkansas
+Austin Daye	2010	2015	F	6-11	220	June 5, 1988	Gonzaga
+Darren Daye	1984	1988	F-G	6-8	220	November 30, 1960	UCLA
+Darius Days	2023	2023	F	6-7	245	October 20, 1999	LSU
+Nando De Colo	2013	2014	G	6-5	200	June 23, 1987	
+Billy DeAngelis	1971	1971	G	6-1	180	October 5, 1946	Saint Joseph's
+Dave DeBusschere*	1963	1974	F-G	6-6	220	October 16, 1940	Detroit Mercy
+Andrew DeClercq	1996	2005	F-C	6-10	230	February 1, 1973	Florida
+Javin DeLaurier	2022	2022	F	6-10	237	April 7, 1998	Duke
+Nate DeLong	1952	1952	C	6-6	220	January 5, 1926	Wisconsin-River Falls
+Joe DePre	1971	1973	G	6-3	185	December 19, 1947	St. John's
+DeMar DeRozan	2010	2024	G-F	6-6	220	August 7, 1989	USC
+Hank DeZonie	1951	1951	C-F	6-6	215	February 12, 1922	Clark Atlanta University
+Greg Deane	1980	1980	G	6-4	190	December 6, 1957	Utah
+Gabriel Deck	2021	2022	F	6-8	232	February 8, 1995	
+Dewayne Dedmon	2014	2023	C	7-0	245	August 12, 1989	USC
+Don Dee	1969	1969	F	6-8	210	August 9, 1943	Saint Louis, Saint Mary of the Plains College
+Archie Dees	1959	1962	F-C	6-8	205	February 22, 1936	Indiana
+Terry Dehere	1994	1999	G	6-2	190	September 12, 1971	Seton Hall
+Red Dehnert	1947	1947	F	6-3	175	January 24, 1924	Columbia University
+Bryce Dejean-Jones	2016	2016	G	6-6	209	August 21, 1992	USC, UNLV, Iowa State
+Sam Dekker	2016	2022	F	6-9	230	May 6, 1994	Wisconsin
+Vinny Del Negro	1989	2002	G	6-4	185	August 9, 1966	NC State
+Malcolm Delaney	2017	2018	G	6-3	190	March 11, 1989	Virginia Tech
+Bison Dele	1992	1999	F-C	6-9	235	April 6, 1969	Maryland, Arizona
+Carlos Delfino	2005	2013	G	6-6	230	August 29, 1982	
+Ángel Delgado	2019	2019	C	6-10	245	November 20, 1994	Seton Hall
+Tony Delk	1997	2006	G	6-1	189	January 28, 1974	Kentucky
+Matthew Dellavedova	2014	2023	G	6-3	200	September 8, 1990	Saint Mary's
+Fennis Dembo	1989	1989	F	6-5	215	January 24, 1966	Wyoming
+Larry Demic	1980	1982	F-C	6-9	225	June 27, 1957	Arizona
+Dell Demps	1994	1997	G	6-3	205	February 12, 1970	University of the Pacific
+George Dempsey	1955	1959	G	6-2	190	July 19, 1929	King's College
+Luol Deng	2005	2019	F	6-9	237	April 16, 1985	Duke
+Kenny Dennard	1982	1984	F	6-8	220	October 18, 1958	Duke
+Blaine Denning	1953	1953	G	6-2	175	September 19, 1930	Lawrence Technological University
+Dexter Dennis	2024	2024	G	6-5	210	February 9, 1999	Wichita State, Texas A&M
+Justin Dentmon	2012	2013	G	5-11	185	September 5, 1985	Washington
+Randy Denton	1972	1977	C	6-10	240	February 18, 1949	Duke
+Rod Derline	1975	1976	G	6-0	175	March 11, 1952	Seattle University
+Marcus Derrickson	2019	2019	F	6-7	249	February 1, 1996	Georgetown
+Dave Deutsch	1967	1967	G	6-1	170	May 13, 1945	University of Rochester
+Corky Devlin	1956	1958	G	6-5	195	December 21, 1931	George Washington
+Ernie DiGregorio	1974	1978	G	6-0	180	January 15, 1951	Providence
+Donte DiVincenzo	2019	2024	G	6-4	203	January 31, 1997	Villanova
+Moussa Diabaté	2023	2024	F	6-11	210	January 21, 2002	Michigan
+Mamadi Diakite	2021	2024	F	6-9	228	January 21, 1997	Virginia
+Derrick Dial	2000	2004	G	6-4	184	December 20, 1975	Eastern Michigan
+Cheick Diallo	2017	2022	F	6-8	219	September 13, 1996	Kansas
+Hamidou Diallo	2019	2024	G	6-5	202	July 31, 1998	Kentucky
+Boris Diaw	2004	2017	F-C	6-8	250	April 16, 1982	
+Yakhouba Diawara	2007	2010	G-F	6-7	225	August 29, 1982	Pepperdine
+Guillermo Díaz	2008	2008	G	6-2	192	March 4, 1985	Miami (FL)
+Gradey Dick	2024	2024	G	6-6	205	November 20, 2003	Kansas
+Dan Dickau	2003	2008	G	6-0	190	September 16, 1978	Washington, Gonzaga
+Kaniel Dickens	2004	2008	F	6-8	215	July 21, 1978	Tyler Junior College, Idaho
+Henry Dickerson	1976	1977	G	6-4	190	November 27, 1951	University of Charleston
+Michael Dickerson	1999	2003	G-F	6-5	190	June 25, 1975	Arizona
+Clyde Dickey	1975	1975	G	6-3	185	December 14, 1951	Cochise Community College, Boise State
+Derrek Dickey	1974	1978	F	6-7	218	March 20, 1951	Cincinnati
+Dick Dickey	1952	1952	G	6-1	175	October 26, 1926	NC State
+John Dickson	1968	1968	C	6-10	240	November 18, 1945	Arkansas State University
+Travis Diener	2006	2010	G	6-1	175	March 1, 1982	Marquette
+Gorgui Dieng	2014	2023	C	6-10	252	January 18, 1990	Louisville
+Ousmane Dieng	2023	2024	F	6-10	216	May 21, 2003	
+Connie Dierking	1959	1971	C-F	6-9	222	October 2, 1936	Cincinnati
+Coby Dietrick	1971	1983	C-F	6-10	220	July 23, 1948	San Jose State
+Craig Dill	1968	1968	C	6-11	215	December 17, 1944	Michigan
+Dwaine Dillard	1976	1976	F	6-6	230	March 9, 1949	Eastern Michigan
+Mickey Dillard	1982	1982	G	6-3	170	October 15, 1958	Florida State
+Bob Dille	1947	1947	F	6-3	190	July 2, 1917	Valparaiso
+Hook Dillon	1950	1950	F	6-3	180	January 8, 1924	UNC
+Byron Dinkins	1990	1991	G	6-1	170	June 15, 1967	UNC Charlotte
+Jackie Dinkins	1972	1972	F	6-5	210	January 22, 1950	Voorhees College
+Harry Dinnel	1968	1968	F-G	6-4	200	October 9, 1940	Pepperdine
+Bill Dinwiddie	1968	1972	F	6-7	220	July 15, 1943	New Mexico Highlands University
+Spencer Dinwiddie	2015	2024	G	6-5	215	April 6, 1993	Colorado
+Ike Diogu	2006	2012	F	6-8	250	September 11, 1983	Arizona State
+DeSagana Diop	2002	2013	C	7-0	300	January 30, 1982	
+Terry Dischinger	1963	1973	F-G	6-7	189	November 21, 1940	Purdue
+Fred Diute	1955	1955	G	6-3	210	January 9, 1929	St. Bonaventure
+Vlade Divac*	1990	2005	C	7-1	243	February 3, 1968	
+Juan Dixon	2003	2009	G	6-3	164	October 9, 1978	Maryland
+Earl Dodd	1950	1950	F	6-5	175	November 1, 1924	Truman State University
+Michael Doleac	1999	2008	C	6-11	262	June 15, 1977	Utah
+Joe Dolhon	1950	1951	G	6-0	175	July 9, 1927	NYU
+Bob Doll	1947	1950	F-C	6-5	195	August 10, 1919	Colorado
+James Donaldson	1981	1995	C	7-2	275	August 16, 1957	Washington State
+Luka Dončić	2019	2024	G-F	6-7	230	February 28, 1999	
+Bob Donham	1951	1954	G-F	6-2	190	October 11, 1926	Ohio State
+Billy Donovan	1988	1988	G	5-11	171	May 30, 1965	Providence
+Harry Donovan	1950	1950	G	6-2	180	September 10, 1926	Muhlenberg College
+Keyon Dooling	2001	2013	G	6-3	196	May 8, 1980	Missouri
+Aleksandar Djordjevic	1997	1997	G	6-2	198	August 26, 1967	
+Jacky Dorsey	1978	1981	F	6-7	230	December 18, 1954	Georgia
+Joey Dorsey	2009	2015	F	6-8	268	December 16, 1983	Memphis
+Ron Dorsey	1972	1972	F	6-4	200	October 10, 1948	Tennessee State
+Tyler Dorsey	2018	2023	G	6-5	183	February 18, 1996	Oregon
+Luguentz Dort	2020	2024	G	6-3	215	April 19, 1999	Arizona State
+Ayo Dosunmu	2022	2024	G	6-5	200	January 17, 2000	Illinois
+Damyean Dotson	2018	2022	G	6-5	210	May 6, 1994	Oregon, Houston
+Devon Dotson	2021	2023	G	6-2	185	August 2, 1999	Kansas
+Quincy Douby	2007	2009	G	6-3	175	May 16, 1984	Rutgers University
+Bruce Douglas	1987	1987	G	6-3	195	April 9, 1964	Illinois
+John Douglas	1982	1983	G	6-2	170	June 12, 1956	Kansas
+Leon Douglas	1977	1983	C-F	6-10	230	August 26, 1954	Alabama
+Sherman Douglas	1990	2001	G	6-0	180	September 15, 1966	Syracuse
+Toney Douglas	2010	2017	G	6-2	195	March 16, 1986	Auburn, Florida State
+Chris Douglas-Roberts	2009	2015	G	6-7	200	January 8, 1987	Memphis
+Sekou Doumbouya	2020	2022	F	6-8	230	December 23, 2000	
+Sonny Dove	1968	1972	F	6-7	198	August 16, 1945	St. John's
+Jerry Dover	1972	1972	G	5-7	155	October 16, 1949	LeMoyne-Owen College
+Zabian Dowdell	2011	2011	G	6-3	191	September 10, 1984	Virginia Tech
+Bill Downey	1948	1948	C	6-6	210	November 11, 1923	Marquette
+Steve Downing	1974	1975	C	6-8	225	September 9, 1950	Indiana
+Jeff Dowtin	2022	2024	G	6-3	185	May 10, 1997	Rhode Island
+Danny Doyle	1963	1963	F	6-8	200	February 6, 1940	Belmont Abbey College
+Milton Doyle	2018	2018	G	6-4	185	October 31, 1993	Loyola Chicago
+PJ Dozier	2018	2023	G	6-6	205	October 25, 1996	South Carolina
+Terry Dozier	1990	1990	F	6-9	210	June 29, 1966	South Carolina
+Goran Dragić	2009	2023	G	6-4	190	May 6, 1986	
+Zoran Dragić	2015	2015	G-F	6-5	200	June 22, 1989	
+Greg Dreiling	1987	1997	C	7-1	250	November 7, 1962	Wichita State, Kansas
+Henri Drell	2024	2024	G	6-9	187	April 25, 2000	
+Bryce Drew	1999	2004	G	6-2	185	September 21, 1974	Valparaiso
+John Drew	1975	1985	F-G	6-6	205	September 30, 1954	Gardner-Webb University
+Larry Drew	1981	1991	G	6-1	170	April 2, 1958	Missouri
+Larry Drew II	2015	2018	G	6-2	180	March 5, 1990	UNC, UCLA
+Clyde Drexler*	1984	1998	G	6-7	210	June 22, 1962	Houston
+Nate Driggers	1997	1997	G	6-5	215	October 12, 1973	University of Montevallo
+Terry Driscoll	1971	1975	F	6-7	215	August 28, 1947	Boston College
+Predrag Drobnjak	2002	2005	C	6-11	270	October 27, 1975	
+Ralph Drollinger	1981	1981	C	7-2	250	April 20, 1954	UCLA
+Andre Drummond	2013	2024	C	6-11	279	August 10, 1993	UConn
+Dennis DuVal	1975	1976	G	6-3	175	March 31, 1952	Syracuse
+Chris Duarte	2022	2024	G	6-6	190	June 13, 1997	Oregon
+Dick Duckett	1958	1958	G	6-1	185	March 25, 1933	St. John's
+Kevin Duckworth	1987	1997	C	7-0	275	April 1, 1964	Eastern Illinois University
+Charles Dudley	1973	1979	G	6-2	180	March 5, 1950	Washington
+Chris Dudley	1988	2003	C	6-11	235	February 22, 1965	Yale
+Jared Dudley	2008	2021	F-G	6-6	237	July 10, 1985	Boston College
+Terry Duerod	1980	1983	G	6-2	180	July 29, 1956	Detroit Mercy
+Bob Duffy	1947	1947	F	6-4	175	July 5, 1922	Tulane
+Bob Duffy	1963	1965	G	6-3	185	September 26, 1940	Colgate
+Chris Duhon	2005	2013	G	6-1	185	August 31, 1982	Duke
+Duje Dukan	2016	2016	F	6-9	220	December 4, 1991	Wisconsin
+David Duke Jr.	2022	2024	G	6-5	205	October 13, 1999	Providence
+Walter Dukes	1956	1963	C	7-0	220	June 23, 1930	Seton Hall
+Joe Dumars*	1986	1999	G	6-3	190	May 24, 1963	McNeese State University
+Rich Dumas	1969	1969	G	6-3	170	April 21, 1944	Northeastern State University
+Richard Dumas	1993	1996	F	6-7	200	May 19, 1969	Oklahoma State
+Tony Dumas	1995	1998	G	6-6	190	August 25, 1972	Missouri-Kansas City
+Andy Duncan	1949	1951	F-C	6-6	195	April 17, 1922	William & Mary
+Tim Duncan*	1998	2016	F-C	6-11	250	April 25, 1976	Wake Forest
+Mike Dunleavy	1977	1990	G	6-3	180	March 21, 1954	South Carolina
+Mike Dunleavy	2003	2017	F-G	6-9	230	September 15, 1980	Duke
+Kris Dunn	2017	2024	G	6-3	205	March 18, 1994	Providence
+Pat Dunn	1958	1958	G	6-2	170	March 17, 1931	Utah State University
+T.R. Dunn	1978	1991	G-F	6-4	192	February 1, 1955	Alabama
+Ronald Dupree	2004	2011	F	6-7	209	January 26, 1981	LSU
+Kevin Durant	2008	2024	F-G	6-11	240	September 29, 1988	Texas
+Jalen Duren	2023	2024	C	6-10	250	November 18, 2003	Memphis
+John Duren	1981	1983	G	6-3	195	October 30, 1958	Georgetown
+Jarrett Durham	1972	1972	F	6-5	188	August 22, 1949	Duquesne
+Pat Durham	1993	1995	F	6-7	210	March 10, 1967	Colorado State
+Devin Durrant	1985	1986	F	6-7	200	October 20, 1960	BYU
+Ken Durrett	1972	1975	F	6-7	190	December 8, 1948	La Salle
+Trevon Duval	2019	2019	G	6-2	189	August 3, 1998	Duke
+Jack Dwan	1949	1949	F-G	6-4	200	May 3, 1921	Loyola Chicago
+Craig Dykema	1982	1982	F	6-8	190	June 11, 1959	Cal State Long Beach
+Gene Dyker	1954	1954	F	6-6	225	February 17, 1930	DePaul
+Jerome Dyson	2012	2012	G	6-3	180	May 1, 1987	UConn
