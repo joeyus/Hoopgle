@@ -22,10 +22,11 @@ def fuzzy_match_stat_cat(query, stat_cats):
     # Handle single words by fuzzy matching
     words = remaining_query.split()
     for word in words:
-        match, score = process.extractOne(word, stat_cats)
-        if score > 80 and match not in matched_stats:  # Adjust threshold as needed and avoid duplicates
-            matched_stats.append(match)
-            remaining_query = remaining_query.replace(word, '').strip()
+        if len(word) > 2:  # Exclude very short words from fuzzy matching
+            match, score = process.extractOne(word, stat_cats)
+            if score > 80 and match not in matched_stats:  # Adjust threshold as needed and avoid duplicates
+                matched_stats.append(match)
+                remaining_query = remaining_query.replace(word, '').strip()
 
     # Combine all matched stat categories into one string
     stat_cat = ' '.join(matched_stats) if matched_stats else None
@@ -84,10 +85,7 @@ def identify_query_components(query):
 
 # Example usage
 queries = [
-    "points over 10 lebron james playoffs 2024",
-    "deaaron fox double triple regular season 2024",
-    "al horford triple double playoffs 2010",
-    "jayson tatum under 10 rebounds regular season 2023"
+    "al horford double triple playoffs 2010"
 ]
 
 for query in queries:
