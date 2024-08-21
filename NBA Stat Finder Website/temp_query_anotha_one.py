@@ -9,6 +9,25 @@ def preprocess_query(query):
     query = query.strip()
     return query
 
+def correct_typos(query):
+    # Correct common typos for "over" and "under"
+    typo_corrections = {
+        "ovr": "over",
+        "ovre": "over",
+        "uder": "under",
+        "undr": "under",
+        "undre": "under",
+        "steels": "steals",
+        "stls": "steals",
+        "asts": "assists",
+        "boards": "rebounds",
+        "pts": "points",
+        "reg" : "regular"
+    }
+    for typo, correction in typo_corrections.items():
+        query = re.sub(rf'\b{typo}\b', correction, query)
+    return query
+
 def fuzzy_match_stat_cat(query, stat_cats):
     matched_stats = []
     remaining_query = query
@@ -24,7 +43,7 @@ def fuzzy_match_stat_cat(query, stat_cats):
     for word in words:
         if len(word) > 2:  # Exclude very short words from fuzzy matching
             match, score = process.extractOne(word, stat_cats)
-            if score > 80 and match not in matched_stats:  # Adjust threshold as needed and avoid duplicates
+            if score > 85 and match not in matched_stats:  # Increase threshold and avoid duplicates
                 matched_stats.append(match)
                 remaining_query = remaining_query.replace(word, '').strip()
 
@@ -35,13 +54,14 @@ def fuzzy_match_stat_cat(query, stat_cats):
 
 def identify_query_components(query):
     query = preprocess_query(query)
+    query = correct_typos(query)
 
     # Initialize components
     year = season = over_under = stat_cat = line = name = None
 
     # Define patterns
     year_pattern = r"\b(19|20)\d{2}\b"
-    season_pattern = r"\b(playoffs?|regular season|season)\b"
+    season_pattern = r"\b(playoffs?|regular season|season|regular|post|post season)\b"
     over_under_pattern = r"\b(over|under)\b"
     line_pattern = r"\b\d+(\.\d+)?\b"
 
@@ -85,7 +105,7 @@ def identify_query_components(query):
 
 # Example usage
 queries = [
-    "al horford double triple playoffs 2010"
+    "zach edey asts over 3 in the regular season 2025"
 ]
 
 for query in queries:
