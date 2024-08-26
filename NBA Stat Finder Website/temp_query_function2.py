@@ -1,6 +1,18 @@
 import re
 from fuzzywuzzy import process
 
+# Dictionary of NBA team names and abbreviations
+nba_teams = {
+    "atlanta hawks": "ATL", "boston celtics": "BOS", "brooklyn nets": "BKN", "charlotte hornets": "CHA",
+    "chicago bulls": "CHI", "cleveland cavaliers": "CLE", "dallas mavericks": "DAL", "denver nuggets": "DEN",
+    "detroit pistons": "DET", "golden state warriors": "GSW", "houston rockets": "HOU", "indiana pacers": "IND",
+    "los angeles clippers": "LAC", "los angeles lakers": "LAL", "memphis grizzlies": "MEM", "miami heat": "MIA",
+    "milwaukee bucks": "MIL", "minnesota timberwolves": "MIN", "new orleans pelicans": "NOP", "new york knicks": "NYK",
+    "oklahoma city thunder": "OKC", "orlando magic": "ORL", "philadelphia 76ers": "PHI", "phoenix suns": "PHX",
+    "portland trail blazers": "POR", "sacramento kings": "SAC", "san antonio spurs": "SAS", "toronto raptors": "TOR",
+    "utah jazz": "UTA", "washington wizards": "WAS"
+}
+
 def preprocess_query(query):
     # Remove stopwords like "during", "in", "the"
     stopwords = ["during", "in", "the"]
@@ -57,7 +69,7 @@ def identify_query_components(query):
     query = correct_typos(query)
 
     # Initialize components
-    year = season = over_under = stat_cat = line = name = team = opponent = None
+    year = season = over_under = stat_cat = line = name = team = opponent_player = None
 
     # Define patterns
     year_pattern = r"\b(19|20)\d{2}\b"
@@ -96,8 +108,13 @@ def identify_query_components(query):
 
     team_match = re.search(team_pattern, query)
     if team_match:
-        opponent = team_match.group(1).strip()
-        query = re.sub(team_pattern, '', query, 1)  # Remove opponent from query
+        possible_team = team_match.group(1).strip().lower()
+        if possible_team in nba_teams:
+            team = possible_team
+            query = re.sub(team_pattern, '', query, 1)  # Remove team from query
+        else:
+            opponent_player = possible_team
+            query = re.sub(team_pattern, '', query, 1)  # Remove opponent player from query
 
     stat_cat, query = fuzzy_match_stat_cat(query, stat_cat_list)
     
@@ -107,13 +124,14 @@ def identify_query_components(query):
     # Ensure no extra words are left in the player's name
     name = ' '.join([word for word in name.split() if word.lower() not in stat_cat_list and word.lower() not in ["double", "triple"]])
 
-    return year, season, over_under, stat_cat, line, name, opponent
+    return year, season, over_under, stat_cat, line, name, team, opponent_player
 
 # Example usage
 queries = [
     "zach edey asts over 3 points vs lebron james in the regular season 2025",
+    "zach edey asts over 3 points vs boston celtics in the regular season 2025",
 ]
 
 for query in queries:
-    year, season, over_under, stat_cat, line, name, opponent = identify_query_components(query)
-    print(f"Year: {year}, Season: {season}, Over/Under: {over_under}, Stat Cat: {stat_cat}, Line: {line}, Name: {name}, Opponent: {opponent}")
+    year, season, over_under, stat_cat, line, name, team, opponent_player = identify_query_components(query)
+    print(f"Year: {year}, Season: {season}, Over/Under: {over_under}, Stat Cat: {stat_cat}, Line: {line}, Name: {name}, Team: {team}, Opponent Player: {opponent_player}")
