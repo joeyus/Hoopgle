@@ -128,8 +128,11 @@ def identify_query_components(query):
 
 # Example usage
 queries = [
-    "zach edey asts over 3 points vs lebron james in the regular season 2025",
-    "zach edey asts over 3 points vs boston celtics in the regular season 2025",
+    "zach edey asts over 3 vs lebron james in the regular season 2025",
+    "zach edey asts over 3 vs boston celtics in the playoffs 2020",
+    "rudy gobert points over 5 2024 vs nikola jokic",
+    "regular season points over 20 lebron james vs nikola jokic",
+    "regular season points over 20 lebron james vs miami heat"
 ]
 
 for query in queries:
