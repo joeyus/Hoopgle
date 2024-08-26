@@ -138,6 +138,34 @@
       input:checked + .slider:before {
         transform: translateX(26px);
       }
+
+      .tab {
+        overflow: hidden;
+        border-bottom: 1px solid #ccc;
+      }
+      .tab button {
+        background-color: inherit;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+      }
+      .tab button:hover {
+        background-color: #ddd;
+      }
+      .tab button.active {
+        background-color: #ccc;
+      }
+      .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border-top: none;
+      }
+      .tabcontent.active {
+        display: block;
+      }
     </style>
   </head>
   <body id="body">
@@ -160,57 +188,114 @@
     <!-- Main body starts -->
     <div class="main_body">
       <h1>Path: /{{ path }}</h1>
-      <p>{{ result_message }}</p>
+      <p id="result-message">{{ result_message }}</p>
+      <!-- Assign an ID to the result message -->
 
-      <!-- Render the game logs table here -->
-      <div>{{ game_logs_html | safe }}</div>
+      <div class="tab">
+        {% if first_game_log %}
+        <button class="tablinks" onclick="openTab(event, 'TotalGameLogs')">
+          Career Playoff Games
+        </button>
+        <button class="tablinks" onclick="openTab(event, 'FirstGameLog')">
+          Latest playoff Series
+        </button>
+        <button class="tablinks" onclick="openTab(event, 'SecondGameLog')">
+          Second Latest playoff Series
+        </button>
+        <button class="tablinks" onclick="openTab(event, 'ThirdGameLog')">
+          Third Latest playoff Series
+        </button>
+        <button class="tablinks" onclick="openTab(event, 'FourthGameLog')">
+          Fourth Latest playoff Series
+        </button>
+        {% else %}
+        <button
+          class="tablinks"
+          onclick="openTab(event, 'RegularGameLogs', '{{result_message}}')"
+        >
+          Regular Season Game Logs
+        </button>
+        <button
+          class="tablinks"
+          onclick="openTab(event, 'Last5', '{{ last5_result }}')"
+        >
+          Last 5 Games
+        </button>
+        <button
+          class="tablinks"
+          onclick="openTab(event, 'Last10', '{{ last10_result }}')"
+        >
+          Last 10 Games
+        </button>
+        <button
+          class="tablinks"
+          onclick="openTab(event, 'Last15',  '{{ last15_result }}')"
+        >
+          Last 15 Games
+        </button>
+        <button
+          class="tablinks"
+          onclick="openTab(event, 'Last20', '{{ last20_result }}')"
+        >
+          Last 20 Games
+        </button>
+        {% endif %}
+      </div>
 
-      {% if total_game_logs_html %}
-      <div>{{ total_game_logs_html | safe }}</div>
-      {% endif %}
-      <!-- Render the last5 result and table if it exists -->
-      {% if last5_df %}
-      <h3 style="text-align: left">{{ last5_result }}</h3>
-      <div>{{ last5_df | safe }}</div>
-      {% endif %}
-
-      <!-- Conditionally render each game log playoff -->
+      <!-- Conditionally render the tab content based on the existence of first_game_log -->
       {% if first_game_log %}
-      <h3>First Game Log</h3>
-      <div>{{ first_game_log | safe }}</div>
+      <div id="TotalGameLogs" class="tabcontent">
+        {{ total_game_logs_html|safe }}
+      </div>
+      <div id="FirstGameLog" class="tabcontent">{{ first_game_log|safe }}</div>
+      <div id="SecondGameLog" class="tabcontent">
+        {{ second_game_log|safe }}
+      </div>
+      <div id="ThirdGameLog" class="tabcontent">{{ third_game_log|safe }}</div>
+      <div id="FourthGameLog" class="tabcontent">
+        {{ fourth_game_log|safe }}
+      </div>
+      {% else %}
+      <div id="RegularGameLogs" class="tabcontent">
+        {{ game_logs_html|safe }}
+      </div>
+      <div id="Last5" class="tabcontent">{{ last5_df|safe }}</div>
+      <div id="Last10" class="tabcontent">{{ last10_df|safe }}</div>
+      <div id="Last15" class="tabcontent">{{ last15_df|safe }}</div>
+      <div id="Last20" class="tabcontent">{{ last20_df|safe }}</div>
       {% endif %}
 
-      <!-- Render the last10 result and table if it exists -->
-      {% if last10_df %}
-      <h3 style="text-align: left">{{ last10_result }}</h3>
-      <div>{{ last10_df | safe }}</div>
-      {% endif %}
+      <script>
+        function openTab(evt, tabName, resultMessage) {
+          // Declare all variables
+          var i, tabcontent, tablinks;
 
-      <!-- Conditionally render each game log playoff -->
+          // Get all elements with class="tabcontent" and hide them
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
 
-      {% if second_game_log %}
-      <h3>Second Game Log</h3>
-      <div>{{ second_game_log | safe }}</div>
-      {% endif %}
+          // Get all elements with class="tablinks" and remove the class "active"
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(
+              " active",
+              ""
+            );
+          }
 
-      <!-- Render the last15 result and table if it exists -->
-      {% if last15_df %}
-      <h3 style="text-align: left">{{ last15_result }}</h3>
-      <div>{{ last15_df | safe }}</div>
-      {% endif %}
+          // Show the current tab, and add an "active" class to the button that opened the tab
+          document.getElementById(tabName).style.display = "block";
+          evt.currentTarget.className += " active";
 
-      <!-- Conditionally render each game log playoff -->
+          // Update the result message
+          document.getElementById("result-message").innerText = resultMessage;
+        }
 
-      {% if third_game_log %}
-      <h3>Third Game Log</h3>
-      <div>{{ third_game_log | safe }}</div>
-      {% endif %}
-      <!-- Conditionally render each game log playoff -->
-
-      {% if fourth_game_log %}
-      <h3>Fourth Game Log</h3>
-      <div>{{ fourth_game_log | safe }}</div>
-      {% endif %}
+        // Automatically open the first tab
+        document.getElementsByClassName("tablinks")[0].click();
+      </script>
     </div>
     <!-- Main body ends -->
 

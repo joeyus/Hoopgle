@@ -15,12 +15,15 @@ html {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 20px 30px;
   align-items: center;
-  box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
-.header__left,
+.header__left {
+  font-family: "Nabla", sans-serif;
+  font-size: 1rem;
+  color: black;
+  /* Ensures the text doesn’t create extra space */
+}
 .header__right {
   display: flex;
   align-items: center;
@@ -41,6 +44,17 @@ html {
 .header__right .header__apps,
 .header__right .material-symbols-outlined {
   margin-left: 20px;
+}
+
+.header-icon {
+  margin: 0 10px; /* Add margin to space out the Instagram icon */
+}
+body.dark-mode .header-icon {
+  filter: invert(1);
+}
+
+.toggle-switch {
+  margin-left: 15px; /* Add margin to the left of the toggle switch */
 }
 
 .main_body {
@@ -85,7 +99,7 @@ html {
 }
 
 .search-box {
-  width: 300px;
+  width: 400px; /* Adjust the width to your desired length */
   padding: 10px;
   padding-right: 35px; /* Add padding to the right to prevent text overlap with the icon */
   border: 2px solid #ddd;
@@ -96,6 +110,8 @@ html {
 .search__buttons {
   display: flex;
   gap: 10px;
+  justify-content: center; /* Center the buttons */
+  margin-top: 10px; /* Add some space between the input and buttons */
 }
 
 /* Default search button style (inactive state) */
@@ -126,4 +142,36 @@ html {
 .search-button.active:focus {
   outline: 2px solid #f87c31;
   outline-offset: 2px;
+}
+
+/* Add these CSS rules for the tabs */
+.tab button {
+  background-color: var(
+    --button-bg-color
+  ); /* Background color for inactive tabs */
+  color: var(--text-color); /* Text color for inactive tabs */
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+.tab button:hover {
+  background-color: var(
+    --button-active-bg-color
+  ); /* Background color on hover */
+}
+
+.tab button.active {
+  background-color: var(
+    --button-active-bg-color
+  ); /* Background color for active tab */
+  color: var(--button-text-color); /* Text color for active tab */
+}
+
+/* Dark mode adjustments */
+body.dark-mode .tab button {
+  background-color: #444; /* Darker background for inactive tabs in dark mode */
+  color: #ddd; /* Lighter text color for inactive tabs in dark mode */
 }

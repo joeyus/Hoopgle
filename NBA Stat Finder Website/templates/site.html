@@ -11,7 +11,7 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
     />
-    <title>Google UI Clone</title>
+    <title>Hoopgle</title>
     <style>
       :root {
         --background-color: #ffffff;
@@ -130,13 +130,19 @@
     <!-- Header starts -->
     <div class="header">
       <div class="header__left">
-        <a href="#">Contact Us</a>
+        <a href="#">hoopgle</a>
       </div>
       <div class="header__right">
-        <a href="#">Gmail</a>
-        <a href="#">Images</a>
-        <span class="material-symbols-outlined header__apps">apps</span>
-        <span class="material-symbols-outlined">account_circle</span>
+        <a href="#">Report Issue</a>
+        <a href="https://www.instagram.com/markamiri_/" target="_blank">
+          <img
+            src="{{ url_for('static', filename='instagramIcon.webp') }}"
+            alt="Instagram Icon"
+            width="24"
+            height="24"
+            class="header-icon"
+          />
+        </a>
         <!-- Dark Mode Toggle Switch -->
         <label class="toggle-switch">
           <input type="checkbox" id="themeToggle" />
