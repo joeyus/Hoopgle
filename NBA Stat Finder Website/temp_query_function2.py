@@ -9,6 +9,25 @@ def preprocess_query(query):
     query = query.strip()
     return query
 
+def correct_typos(query):
+    # Correct common typos for "over" and "under"
+    typo_corrections = {
+        "ovr": "over",
+        "ovre": "over",
+        "uder": "under",
+        "undr": "under",
+        "undre": "under",
+        "steels": "steals",
+        "stls": "steals",
+        "asts": "assists",
+        "boards": "rebounds",
+        "pts": "points",
+        "reg" : "regular"
+    }
+    for typo, correction in typo_corrections.items():
+        query = re.sub(rf'\b{typo}\b', correction, query)
+    return query
+
 def fuzzy_match_stat_cat(query, stat_cats):
     matched_stats = []
     remaining_query = query
@@ -22,10 +41,11 @@ def fuzzy_match_stat_cat(query, stat_cats):
     # Handle single words by fuzzy matching
     words = remaining_query.split()
     for word in words:
-        match, score = process.extractOne(word, stat_cats)
-        if score > 80:  # Adjust threshold as needed
-            matched_stats.append(match)
-            remaining_query = remaining_query.replace(word, '').strip()
+        if len(word) > 2:  # Exclude very short words from fuzzy matching
+            match, score = process.extractOne(word, stat_cats)
+            if score > 85 and match not in matched_stats:  # Increase threshold and avoid duplicates
+                matched_stats.append(match)
+                remaining_query = remaining_query.replace(word, '').strip()
 
     # Combine all matched stat categories into one string
     stat_cat = ' '.join(matched_stats) if matched_stats else None
@@ -34,15 +54,17 @@ def fuzzy_match_stat_cat(query, stat_cats):
 
 def identify_query_components(query):
     query = preprocess_query(query)
+    query = correct_typos(query)
 
     # Initialize components
-    year = season = over_under = stat_cat = line = name = None
+    year = season = over_under = stat_cat = line = name = team = opponent = None
 
     # Define patterns
     year_pattern = r"\b(19|20)\d{2}\b"
-    season_pattern = r"\b(playoffs?|regular season|season)\b"
+    season_pattern = r"\b(playoffs?|regular season|season|regular|post|post season)\b"
     over_under_pattern = r"\b(over|under)\b"
     line_pattern = r"\b\d+(\.\d+)?\b"
+    team_pattern = r"\bvs\b\s+([A-Za-z\s]+)"
 
     stat_cat_list = [
         "points", "rebounds", "assists", "blocks", "steals",
@@ -72,18 +94,26 @@ def identify_query_components(query):
         line = line_match.group(0)
         query = re.sub(line_pattern, '', query, 1)  # Remove line from query
 
+    team_match = re.search(team_pattern, query)
+    if team_match:
+        opponent = team_match.group(1).strip()
+        query = re.sub(team_pattern, '', query, 1)  # Remove opponent from query
+
     stat_cat, query = fuzzy_match_stat_cat(query, stat_cat_list)
     
     # The remaining query is considered the player's name
     name = query.strip()
 
-    return year, season, over_under, stat_cat, line, name
+    # Ensure no extra words are left in the player's name
+    name = ' '.join([word for word in name.split() if word.lower() not in stat_cat_list and word.lower() not in ["double", "triple"]])
+
+    return year, season, over_under, stat_cat, line, name, opponent
 
 # Example usage
 queries = [
-    "points over 10 lebron james playoffs 2024","deaaron fox double triple regular season 2024"
+    "zach edey asts over 3 points vs lebron james in the regular season 2025",
 ]
 
 for query in queries:
-    year, season, over_under, stat_cat, line, name = identify_query_components(query)
-    print(f"Year: {year}, Season: {season}, Over/Under: {over_under}, Stat Cat: {stat_cat}, Line: {line}, Name: {name}")
+    year, season, over_under, stat_cat, line, name, opponent = identify_query_components(query)
+    print(f"Year: {year}, Season: {season}, Over/Under: {over_under}, Stat Cat: {stat_cat}, Line: {line}, Name: {name}, Opponent: {opponent}")
