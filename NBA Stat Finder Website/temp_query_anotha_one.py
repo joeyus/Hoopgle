@@ -105,7 +105,7 @@ def identify_query_components(query):
 
 # Example usage
 queries = [
-    "zach edey asts over 3 in the regular season 2025"
+    "zach edey asts over 3 in the regular season 2025",
 ]
 
 for query in queries:
