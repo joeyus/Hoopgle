@@ -49,6 +49,9 @@ To get started with Hoopgle, follow these steps:
 
 Once the server is running, open your browser and navigate to `http://127.0.0.1:5000/` to start using Hoopgle. Use the search bar to find stats on players, teams, and games.
 
+## Languages
+
+Python, HTML, CSS
 
 ## Contact
 
